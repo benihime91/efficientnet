@@ -259,6 +259,7 @@ def EfficientNet(width_coefficient,
                  input_shape=None,
                  pooling=None,
                  classes=1000,
+                 conv_stem_stride=2,
                  **kwargs):
     """Instantiates the EfficientNet architecture using given scaling coefficients.
     Optionally loads weights pre-trained on ImageNet.
@@ -343,7 +344,7 @@ def EfficientNet(width_coefficient,
     # Build stem
     x = img_input
     x = layers.Conv2D(round_filters(32, width_coefficient, depth_divisor), 3,
-                      strides=(2, 2),
+                      strides=(conv_stem_stride, conv_stem_stride),
                       padding='same',
                       use_bias=False,
                       kernel_initializer=CONV_KERNEL_INITIALIZER,
